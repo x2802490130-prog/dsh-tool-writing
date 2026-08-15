@@ -1,6 +1,6 @@
 {
   "name": "dsh-tool-writing",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Writing engine plugin for the DeepSeek Harness: long-form web-novel orchestration with a separate DeepSeek key for parallel fan-out generation, lore management, semantic vector retrieval, and corpus library.",
   "keywords": [
     "deepseek-harness",
