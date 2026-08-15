@@ -74,6 +74,11 @@
 - `novel_proofread`：机械校对某一章，输出「片段 | 问题类型 | 建议改为」清单，绝不改写文风、不重写句子。
 - `novel_plan`：项目根 `plan.json` 的本地连载计划——`set-goal` 设定章数/字数/完本日期后自动算每日产出；`schedule`/`mark-done` 登记排期；存稿余量按 manifest 实际章节联动。不做平台发布对接，发布由作者自行粘贴。
 
+## 语义检索的两种后端
+
+- **百炼稠密向量**（`DASHSCOPE_API_KEY` 可用时）：`text-embedding-v3` 1024 维余弦检索
+- **DeepSeek 概念索引**（无百炼 key 或调用失败时自动降级）：用 `deepseek-v4-flash` 为每个文档抽取概念词（带权重），构成稀疏语义向量空间；查询时以「词表锚定」把检索意图翻译成文档概念词，按 cosine + idf 排序。纯自家 key，零第三方依赖，命中可解释（能显示命中概念）
+- 降级自动发生：`novel_embed` 建索引、`novel_vsearch`/`novel_semantic` 检索都会在稠密路径不可用时无缝切换
 ## 项目目录约定
 
 \`\`\`
