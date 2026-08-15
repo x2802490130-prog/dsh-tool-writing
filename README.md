@@ -101,7 +101,7 @@ research/                # 考据与审校笔记
 
 \`\`\`
 dsh plugin --profile web add file:<本目录>
-也可以直接从 npm 安装：`dsh plugin add dsh-tool-writing`。
+也可以直接从 npm 安装：`dsh plugin --profile web add dsh-tool-writing`。
 \`\`\`
 
 然后在写作预设的 \`agent.cordis.yml\` 中挂载：
