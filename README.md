@@ -60,12 +60,12 @@
 
 ## 思考档位路由（V4 三档）
 
-- 引擎 `generate()` 支持 `effort: low | high | max`（官方 `reasoning_effort` 三档）：`low` 走主模型（默认 deepseek-v4-flash），`high`/`max` 走 `deepModel`（默认 deepseek-v4-pro）
+- 引擎 `generate()` 支持 `effort: low | high | max`：`low`/默认走主模型（deepseek-v4-flash）并**显式关闭思考模式**（V4 官方默认开思考，会吃掉输出额度且不支持 temperature）；`high`/`max` 走 `deepModel`（deepseek-v4-pro）并开启思考 + 对应档位
 - 工具路由：草稿/续写/批量/润色/校对/检索重排 → low；一致性审校/设定抽取/蒸馏校验/演化检测/剧情决断/书库拆解/章末编排 → high；`novel_simulate` 深度推演 → max
 - 兼容旧调用：`deep: true` 等价 high（不上 wire 参数，行为不变）
 ### 缓存前缀布局（批量省钱）
 
-- 批量生成（`novel_batch`）每个请求的 `system` 与共享上下文（作品信息+设定卡片+大纲+最近章节）逐字节一致，章节差异只出现在提示尾部
+- 批量生成（`novel_batch`）每个请求的 `system` 与共享上下文（作品信息+设定卡片+大纲+最近章节）逐字节一致，章节差异只出现在提示尾部；`generateMany` 默认**先串行首任务预热缓存**，其余并发时自动命中
 - DeepSeek 前缀缓存自动命中：v4-flash 命中价 $0.0028/M、v4-pro $0.003625/M（约为未命中价的 1/50~1/120），批量 10 章的费用大头只在首次请求
 - 有回归测试锁死该布局（`smoke-cache.mjs`）：共享前缀在前、章差异在尾，防止未来改动破坏缓存友好性
 ## 用量记账与连载计划
