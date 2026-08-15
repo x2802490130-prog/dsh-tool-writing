@@ -1,5 +1,7 @@
 # dsh-tool-writing
 
+[![npm version](https://img.shields.io/npm/v/dsh-tool-writing)](https://www.npmjs.com/package/dsh-tool-writing)  [![license](https://img.shields.io/npm/l/dsh-tool-writing)](https://github.com/x2802490130-prog/dsh-tool-writing/blob/main/LICENSE)
+
 面向 DeepSeek Harness 的「写文引擎」插件：让 harness 具备长篇网络小说的创作能力，并用一把**独立的 DeepSeek key** 承担「子线程 / 分流 / 多线并行」的生成与检索任务。
 
 ## 设计定位
