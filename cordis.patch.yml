@@ -1,0 +1,4 @@
+# Writing engine bundle patch: mounts the tool-writing plugin.
+- insert:
+    - id: tool-writing
+      name: 'dsh-tool-writing'

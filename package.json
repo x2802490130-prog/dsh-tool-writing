@@ -1,0 +1,59 @@
+{
+  "name": "dsh-tool-writing",
+  "version": "0.3.0",
+  "description": "Writing engine plugin for the DeepSeek Harness: long-form web-novel orchestration with a separate DeepSeek key for parallel fan-out generation, lore management, semantic vector retrieval, and corpus library.",
+  "keywords": [
+    "deepseek-harness",
+    "novel",
+    "writing",
+    "web-novel",
+    "embedding",
+    "semantic-search"
+  ],
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./engine": "./lib/engine.js",
+    "./library": "./lib/library.js",
+    "./search": "./lib/search.js",
+    "./vector": "./lib/vector.js",
+    "./tools": "./lib/tools.js",
+    "./embed-manager": "./lib/embed-manager.js",
+    "./sqlite-index": "./lib/sqlite-index.js",
+    "./package.json": "./package.json",
+    "./sync": "./lib/sync.js",
+    "./usage": "./lib/usage.js",
+    "./plan": "./lib/plan.js"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dependencies": {
+    "fflate": "^0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x2802490130-prog/dsh-tool-writing"
+  },
+  "bugs": {
+    "url": "https://github.com/x2802490130-prog/dsh-tool-writing/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

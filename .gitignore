@@ -1,0 +1,11 @@
+node_modules/
+*.log
+*.tgz
+.DS_Store
+*.sqlite
+writing-usage.json
+plan.json
+chapters/
+outline/
+lore/
+research/
