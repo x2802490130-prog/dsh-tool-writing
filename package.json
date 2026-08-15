@@ -46,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/x2802490130-prog/dsh-tool-writing"
+    "url": "git+https://github.com/x2802490130-prog/dsh-tool-writing.git"
   },
   "bugs": {
     "url": "https://github.com/x2802490130-prog/dsh-tool-writing/issues"
