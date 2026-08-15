@@ -58,6 +58,11 @@
 
 语义向量检索使用百炼 \`text-embedding-v3\`（1024 维，复用 DASHSCOPE_API_KEY，零新增成本）：\`novel_embed\` 建索引（增量可续传，内容变更自动作废重嵌），\`novel_semantic\` 混合召回，\`novel_vsearch\` 纯向量；无 key 时自动退化为字面检索。
 
+## 思考档位路由（V4 三档）
+
+- 引擎 `generate()` 支持 `effort: low | high | max`（官方 `reasoning_effort` 三档）：`low` 走主模型（默认 deepseek-v4-flash），`high`/`max` 走 `deepModel`（默认 deepseek-v4-pro）
+- 工具路由：草稿/续写/批量/润色/校对/检索重排 → low；一致性审校/设定抽取/蒸馏校验/演化检测/剧情决断/书库拆解/章末编排 → high；`novel_simulate` 深度推演 → max
+- 兼容旧调用：`deep: true` 等价 high（不上 wire 参数，行为不变）
 ## 用量记账与连载计划
 
 - `novel_usage`：查看独立 key 的调用总账（次数/输入输出 token/缓存命中/估算费用，按模型与最近 7 天汇总）。明细落盘 `$DSH_HOME/writing-usage.json`（上限 2000 条自动裁剪），单价可按需覆盖。
