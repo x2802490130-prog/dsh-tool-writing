@@ -9,3 +9,13 @@ chapters/
 outline/
 lore/
 research/
+
+review/
+world-state.json
+characters.json
+evolution.json
+foreshadowing.json
+threads.json
+.writing-index.sqlite
+.writing-index.meta.json
+.writing-concepts.json
