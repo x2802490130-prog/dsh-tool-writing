@@ -1,7 +1,7 @@
 ﻿{
   "name": "dsh-tool-writing",
-  "version": "0.8.0",
-  "description": "Writing engine plugin for the DeepSeek Harness: long-form web-novel orchestration with a separate DeepSeek key for parallel fan-out generation, lore management, semantic vector retrieval, and corpus library.",
+  "version": "0.8.1",
+  "description": "面向 DeepSeek Harness 的长篇网络小说写文引擎插件：独立 DeepSeek key 分流并行生成（起草/润色/同步/子代理四通道）、多书隔离（一个工作区=一本书）、弹性合同体系（故事承诺书/追读力台账/五段任务书/硬关卡）、章后八项体检（含节奏信号与 AI 味检查）、起点+番茄双平台审稿、发书前敏感自查、语义检索（概念索引）与饲料区书库管理。",
   "keywords": [
     "deepseek-harness",
     "novel",

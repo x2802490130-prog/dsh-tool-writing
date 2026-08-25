@@ -98,12 +98,50 @@
 
 ### 1. 安装
 
+三种方式任选其一：
+
+**方式 A：npm 安装（推荐，版本自动跟随）**
+
 ```bash
-git clone https://github.com/x2802490130-prog/dsh-tool-writing
-# 把 lib/ 与 cordis.patch.yml 放入 <DSH_HOME>/profiles/node_modules/dsh-tool-writing/ 并重启 harness
+dsh plugin --profile web add dsh-tool-writing
+# 或直接 npm 安装后手动接线：
+npm install dsh-tool-writing
 ```
 
-### 2. 配置 key（多 key 拆刀，可选）
+**方式 B：从 GitHub 安装**
+
+```bash
+git clone https://github.com/x2802490130-prog/dsh-tool-writing
+# 把仓库的 lib/ 与 cordis.patch.yml 复制到：
+#   <DSH_HOME>/profiles/node_modules/dsh-tool-writing/
+```
+
+**方式 C：作为本地插件（开发调试用）**
+
+```bash
+dsh plugin --profile web add file:D:/path/to/dsh-tool-writing
+```
+
+安装完成后**重启 harness**。
+
+### 2. 挂载到写作预设
+
+在写作预设的 `agent.cordis.yml` 中挂载插件：
+
+```yaml
+- id: tool-writing
+  name: 'dsh-tool-writing'
+  config:
+    apiKeyEnv: DSH_WRITING_API_KEY
+    model: deepseek-v4-flash
+    deepModel: deepseek-v4-pro
+    maxConcurrency: 4
+    # projectRoot: 'D:/某本书的目录'   # 多书场景建议留空，自动跟随会话工作区
+```
+
+重启后进入写作会话，发 `novel_status` 验证：能返回当前书的项目信息即安装成功。
+
+### 3. 配置 key（多 key 拆刀，可选）
 
 插件使用独立于主 Agent 的 DeepSeek key（`DSH_WRITING_API_KEY`），可进一步按角色拆分：
 
@@ -114,7 +152,7 @@ git clone https://github.com/x2802490130-prog/dsh-tool-writing
 | `DSH_WRITING_POLISH_KEY` | 润色通道（可选，回退主 key） |
 | `DSH_WRITING_SYNC_KEY` | 同步/深任务通道（可选，回退主 key） |
 
-### 3. 开一本书
+### 4. 开一本书
 
 ```
 1. 新建工作区（一个工作区 = 一本书），在会话里说「开新书，我想写……」→ novel_brief 引导澄清 → 完整方案
@@ -123,6 +161,15 @@ git clone https://github.com/x2802490130-prog/dsh-tool-writing
 4. 每章写完 novel_sync 自动编排；定期 novel_audit 八项体检；novel_ledger scan 追读力
 5. 发书前 novel_market 平台审稿 + novel_censor 敏感自查
 ```
+
+### 5. 常见问题
+
+| 现象 | 处理 |
+|---|---|
+| `novel_*` 工具不存在 | 预设未挂载插件：检查 agent.cordis.yml 的 `- id: tool-writing`，重启 |
+| 报错 "no API key" | 未配置 `DSH_WRITING_API_KEY`：在凭据存储（Models 页）或环境变量配置 |
+| 显示的是另一本书的项目 | 工作区选错了：一个工作区=一本书；或预设里显式 projectRoot 钉死了 |
+| 语义检索没有结果 | 先跑 `novel_embed` 建概念索引（增量可断点续传）；未建时自动退化为字面检索 |
 
 ## 数据安全
 
@@ -134,6 +181,7 @@ git clone https://github.com/x2802490130-prog/dsh-tool-writing
 
 | 版本 | 主要变化 |
 |---|---|
+| **v0.8.1** | README 安装说明完整化（npm/GitHub/本地插件三种方式 + 挂载示例 + 常见问题）；npm 包描述扩充为中文详述 |
 | **v0.8.0** | 弹性合同体系：故事承诺书注入/追读力台账/五段任务书/硬关卡/八项体检（节奏信号+AI味）；平台审稿 novel_market + 敏感自查 novel_censor；全局技法库落地；引导式开书 novel_brief；多书隔离（工作区感知）；用量按书记账 |
 | v0.7.0 | 工作区注册制、会话隔离重构、四查注入、全链路 maxTokens 20000 |
 | v0.6.x | 饲料区功能蒸馏、写作提醒段、校对数量检查 |
